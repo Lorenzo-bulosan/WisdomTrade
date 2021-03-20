@@ -16,5 +16,6 @@ namespace WisdomTradeApp.Data
         public DbSet<Position> Positions { get; set; }
         public DbSet<TraderAccount> TraderAccount { get; set; }
         public DbSet<TraderAccount_Position> TraderAccount_Position { get; set; }
+        public DbSet<WisdomTrade> WisdomTrade { get; set; }
     }
 }

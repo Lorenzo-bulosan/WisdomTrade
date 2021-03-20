@@ -1,0 +1,54 @@
+﻿@model WisdomTradeApp.Models.WisdomTrade
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>WisdomTrade</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Ticker)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Ticker)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Population)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Population)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.TotalCredit)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.TotalCredit)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.AverageUpperLimit)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.AverageUpperLimit)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.AverageLowerLimit)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.AverageLowerLimit)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.FinalDirection)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.FinalDirection)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

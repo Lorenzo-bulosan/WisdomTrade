@@ -1,0 +1,65 @@
+﻿@model IEnumerable<WisdomTradeApp.Models.WisdomTrade>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Ticker)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Population)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TotalCredit)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AverageUpperLimit)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AverageLowerLimit)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FinalDirection)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Ticker)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Population)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TotalCredit)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AverageUpperLimit)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AverageLowerLimit)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FinalDirection)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

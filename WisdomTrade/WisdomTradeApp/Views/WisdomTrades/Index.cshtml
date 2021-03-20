@@ -19,16 +19,10 @@
                 @Html.DisplayNameFor(model => model.Population)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.TotalCredit)
+                @Html.DisplayNameFor(model => model.Date)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.AverageUpperLimit)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.AverageLowerLimit)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FinalDirection)
+                @Html.DisplayNameFor(model => model.FinalPricePrediction)
             </th>
             <th></th>
         </tr>
@@ -43,16 +37,10 @@
                 @Html.DisplayFor(modelItem => item.Population)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.TotalCredit)
+                @Html.DisplayFor(modelItem => item.Date)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.AverageUpperLimit)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.AverageLowerLimit)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FinalDirection)
+                @Html.DisplayFor(modelItem => item.FinalPricePrediction)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |

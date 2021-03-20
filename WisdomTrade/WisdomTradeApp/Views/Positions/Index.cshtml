@@ -16,22 +16,10 @@
                 @Html.DisplayNameFor(model => model.Ticker)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.OpenDateTime)
+                @Html.DisplayNameFor(model => model.Date)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.CloseDateTime)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Credit)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.UpperLimit)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.LowerLimit)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Direction)
+                @Html.DisplayNameFor(model => model.PricePrediction)
             </th>
             <th></th>
         </tr>
@@ -43,22 +31,10 @@
                 @Html.DisplayFor(modelItem => item.Ticker)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.OpenDateTime)
+                @Html.DisplayFor(modelItem => item.Date)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.CloseDateTime)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Credit)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.UpperLimit)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.LowerLimit)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Direction)
+                @Html.DisplayFor(modelItem => item.PricePrediction)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |

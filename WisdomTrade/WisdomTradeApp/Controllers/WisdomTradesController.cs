@@ -54,7 +54,7 @@ namespace WisdomTradeApp.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Ticker,Population,TotalCredit,AverageUpperLimit,AverageLowerLimit,FinalDirection")] WisdomTrade wisdomTrade)
+        public async Task<IActionResult> Create([Bind("Id,Ticker,Population,Date,FinalPricePrediction")] WisdomTrade wisdomTrade)
         {
             if (ModelState.IsValid)
             {
@@ -86,7 +86,7 @@ namespace WisdomTradeApp.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Ticker,Population,TotalCredit,AverageUpperLimit,AverageLowerLimit,FinalDirection")] WisdomTrade wisdomTrade)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Ticker,Population,Date,FinalPricePrediction")] WisdomTrade wisdomTrade)
         {
             if (id != wisdomTrade.Id)
             {

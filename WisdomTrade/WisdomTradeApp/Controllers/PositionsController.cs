@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -11,7 +10,6 @@ using WisdomTradeApp.Models;
 
 namespace WisdomTradeApp.Controllers
 {
-    [Authorize]
     public class PositionsController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -56,7 +54,7 @@ namespace WisdomTradeApp.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Ticker,OpenDateTime,CloseDateTime,Credit,UpperLimit,LowerLimit,Direction")] Position position)
+        public async Task<IActionResult> Create([Bind("Id,Ticker,Date,PricePrediction")] Position position)
         {
             if (ModelState.IsValid)
             {
@@ -88,7 +86,7 @@ namespace WisdomTradeApp.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Ticker,OpenDateTime,CloseDateTime,Credit,UpperLimit,LowerLimit,Direction")] Position position)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Ticker,Date,PricePrediction")] Position position)
         {
             if (id != position.Id)
             {

@@ -10,9 +10,8 @@ namespace WisdomTradeApp.Models
         public int Id { get; set; }
         public string Ticker { get; set; }
         public int Population { get; set; }
-        public float TotalCredit { get; set; }
-        public float AverageUpperLimit { get; set; }
-        public float AverageLowerLimit { get; set; }
-        public bool FinalDirection { get; set; }
+        public DateTime Date { get; set; }
+        public float FinalPricePrediction { get; set; }
+
     }
 }

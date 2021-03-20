@@ -8,6 +8,7 @@ namespace WisdomTradeApp.Models
     // Junction table between TraderAccount-Position
     public class TraderAccount_Position
     {
+        public int Id { get; set; }
         public int PositionId { get; set; }
         public string TraderEmail { get; set; }
     }

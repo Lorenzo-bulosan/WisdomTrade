@@ -13,8 +13,12 @@
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Ticker" class="control-label"></label>
-                <input asp-for="Ticker" class="form-control" />
+                <label asp-for="Ticker" class="control-label">
+                    Ticker
+                    <a target="_blank" href="https://www.nasdaq.com/market-activity/stocks/screener?exchange=nasdaq&letter=0&render=download"> (possible tickers)</a>
+                </label>
+                <input id="TickerInput" asp-for="Ticker" class="form-control" />
+                @*html.dropdownlistfor()*@
                 <span asp-validation-for="Ticker" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -39,5 +43,15 @@
 </div>
 
 @section Scripts {
+
+    @* call other partial view *@
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    @* Jquery code inside this section or it wont work, js works on a normal script outside this section *@
+    <script>
+        //Document ready
+        $(function () {                   
+            
+        })
+    </script>
 }

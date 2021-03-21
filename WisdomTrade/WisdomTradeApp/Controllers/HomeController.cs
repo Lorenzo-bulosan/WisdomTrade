@@ -5,22 +5,65 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using WisdomTradeApp.Data;
 using WisdomTradeApp.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace WisdomTradeApp.Controllers
 {
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly ApplicationDbContext _context;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, ApplicationDbContext context)
         {
             _logger = logger;
+            _context = context;
+        }
+        public async Task<IActionResult> Index()
+        {
+            var wisdomTrades = GetWisdomTrades();
+            return View(await wisdomTrades.ToListAsync());
         }
 
-        public IActionResult Index()
+        // use if wisdom trade table is filled using method on position controller
+        //public IActionResult Index()
+        //{
+        //    return View();
+        //}
+
+        private IQueryable<WisdomTrade> GetWisdomTrades()
         {
-            return View();
+            var wisdomTrades =
+                from c in _context.Positions
+                group c by new
+                {
+                    c.Ticker,
+                    c.Date,
+                } into gcs
+                select new WisdomTrade()
+                {
+                    Ticker = gcs.Key.Ticker,
+                    Date = gcs.Key.Date,
+                    Population = gcs.Count(),
+                    FinalPricePrediction = gcs.Average(g => g.PricePrediction)
+                };
+            return wisdomTrades;
+        }
+
+        // price average of a ticker at a specific date
+        private float GetPriceAverage(string ticker, DateTime date)
+        {
+            var matchingPositions = _context.Positions.Where(p => p.Ticker == ticker && p.Date == date);
+
+            return matchingPositions.Sum(p => p.PricePrediction)/matchingPositions.Count(); 
+        }
+
+        // get all position tickers at certain date
+        private IQueryable GetAllPositionsAtDate(DateTime date)
+        {
+            return _context.Positions.Where(p => p.Date == date);
         }
 
         public IActionResult Privacy()

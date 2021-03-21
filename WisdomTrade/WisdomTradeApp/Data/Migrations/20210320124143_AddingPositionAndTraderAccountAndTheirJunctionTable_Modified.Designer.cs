@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WisdomTradeApp.Data;
 
 namespace WisdomTradeApp.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210320124143_AddingPositionAndTraderAccountAndTheirJunctionTable_Modified")]
+    partial class AddingPositionAndTraderAccountAndTheirJunctionTable_Modified
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -226,14 +228,26 @@ namespace WisdomTradeApp.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<DateTime>("Date")
+                    b.Property<DateTime>("CloseDateTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<float>("PricePrediction")
+                    b.Property<float>("Credit")
                         .HasColumnType("real");
+
+                    b.Property<bool>("Direction")
+                        .HasColumnType("bit");
+
+                    b.Property<float>("LowerLimit")
+                        .HasColumnType("real");
+
+                    b.Property<DateTime>("OpenDateTime")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Ticker")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<float>("UpperLimit")
+                        .HasColumnType("real");
 
                     b.HasKey("Id");
 
@@ -274,30 +288,6 @@ namespace WisdomTradeApp.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("TraderAccount_Position");
-                });
-
-            modelBuilder.Entity("WisdomTradeApp.Models.WisdomTrade", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("datetime2");
-
-                    b.Property<float>("FinalPricePrediction")
-                        .HasColumnType("real");
-
-                    b.Property<int>("Population")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Ticker")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("WisdomTrade");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

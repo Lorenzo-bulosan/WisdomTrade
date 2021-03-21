@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WisdomTradeApp.Data;
 
 namespace WisdomTradeApp.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210320144049_AddingTableWisdomTrade")]
+    partial class AddingTableWisdomTrade
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -226,14 +228,26 @@ namespace WisdomTradeApp.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<DateTime>("Date")
+                    b.Property<DateTime>("CloseDateTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<float>("PricePrediction")
+                    b.Property<float>("Credit")
                         .HasColumnType("real");
+
+                    b.Property<bool>("Direction")
+                        .HasColumnType("bit");
+
+                    b.Property<float>("LowerLimit")
+                        .HasColumnType("real");
+
+                    b.Property<DateTime>("OpenDateTime")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Ticker")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<float>("UpperLimit")
+                        .HasColumnType("real");
 
                     b.HasKey("Id");
 
@@ -283,17 +297,23 @@ namespace WisdomTradeApp.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("datetime2");
-
-                    b.Property<float>("FinalPricePrediction")
+                    b.Property<float>("AverageLowerLimit")
                         .HasColumnType("real");
+
+                    b.Property<float>("AverageUpperLimit")
+                        .HasColumnType("real");
+
+                    b.Property<bool>("FinalDirection")
+                        .HasColumnType("bit");
 
                     b.Property<int>("Population")
                         .HasColumnType("int");
 
                     b.Property<string>("Ticker")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<float>("TotalCredit")
+                        .HasColumnType("real");
 
                     b.HasKey("Id");
 

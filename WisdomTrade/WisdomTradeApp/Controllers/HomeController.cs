@@ -25,25 +25,24 @@ namespace WisdomTradeApp.Controllers
         public async Task<IActionResult> Index()
         {
 
-            var allPositions = _context.Positions;
-
-            foreach(var p in allPositions)
-            {
-                Console.WriteLine(p.Date);
-
-                var dayPositions = GetAllPositionsAtDate(p.Date).AsQueryable();
-
-                foreach (var i in dayPositions)
+            var wisdomTrades =
+                from c in _context.Positions
+                group c by new
                 {
-                    i.
-                }
+                    c.Ticker,
+                    c.Date,
+                } into gcs
+                select new WisdomTrade()
+                {
+                    Ticker = gcs.Key.Ticker,
+                    Date = gcs.Key.Date,
+                    FinalPricePrediction = gcs.Average(g => g.PricePrediction)
+                };
 
-
-            }
-
-            return View(await _context.Positions.ToListAsync());
+            return View(await wisdomTrades.ToListAsync());
         }
 
+        // price average of a ticker at a specific date
         private float GetPriceAverage(string ticker, DateTime date)
         {
             var matchingPositions = _context.Positions.Where(p => p.Ticker == ticker && p.Date == date);
@@ -51,6 +50,7 @@ namespace WisdomTradeApp.Controllers
             return matchingPositions.Sum(p => p.PricePrediction)/matchingPositions.Count(); 
         }
 
+        // get all position tickers at certain date
         private IQueryable GetAllPositionsAtDate(DateTime date)
         {
             return _context.Positions.Where(p => p.Date == date);

@@ -5,11 +5,12 @@
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <h1 class="display-4">Wisdom of the crowd predictions</h1>
+    <br />
 </div>
 
-@*Testing*@
+@Html.Partial("_TradingViewGraph")
+
 <table class="table">
     <thead>
         <tr>
@@ -31,20 +32,30 @@
     <tbody>
         @foreach (var item in Model)
         {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Ticker)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Date)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Population)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FinalPricePrediction)
-            </td>
-        </tr>
+
+            string ticker = $"NASDAQ:{item.Ticker}";
+   
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Ticker)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Date)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Population)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FinalPricePrediction)
+                </td>
+                <td>
+                    <button id="btnGraphTicker" onclick="DrawGraph('@ticker')">Graph of ticker</button>
+                </td>                
+            </tr>
         }
     </tbody>
 </table>
+
+<script>
+    
+</script>

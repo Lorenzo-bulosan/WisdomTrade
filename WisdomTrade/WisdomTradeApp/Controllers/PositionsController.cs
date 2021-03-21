@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
@@ -64,7 +65,8 @@ namespace WisdomTradeApp.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(position);
+
+            return View(position);            
         }
 
         // GET: Positions/Edit/5
@@ -150,6 +152,49 @@ namespace WisdomTradeApp.Controllers
         private bool PositionExists(int id)
         {
             return _context.Positions.Any(e => e.Id == id);
+        }
+        private int CountPositions(string ticker, DateTime date)
+        {
+            return _context.Positions
+                .Where(p => p.Ticker == ticker && p.Date==date).Count();
+        }
+        private IEnumerable<Position> GetAllPositions(string ticker, DateTime date)
+        {
+            return _context.Positions
+                .Where(p => p.Ticker == ticker && p.Date == date);
+        }
+
+        // currently not in use
+        // call controller of wisdom trade to find and update if exist and create if not exist
+        // creates an entry on db
+        private async Task UpdateWisdomTrade(Position position)
+        {
+            // update wisdom trade table
+            WisdomTradesController wtc = new WisdomTradesController(_context);
+            WisdomTrade wisdomTrade = wtc.GetWisdomTrade(position.Ticker, position.Date);
+
+            // update
+            if (wisdomTrade != null)
+            {
+                // find corresponding positions and update wisdomTrade item
+                var matchingPositions = GetAllPositions(position.Ticker, position.Date);
+                wisdomTrade.FinalPricePrediction = matchingPositions.Average(mp => mp.PricePrediction);
+                wisdomTrade.Population = matchingPositions.Count();
+
+                // apply changes
+                await wtc.Edit(wisdomTrade.Id, wisdomTrade);
+            }
+            //create
+            else
+            {
+                var newWisdomTrade = new WisdomTrade();
+                newWisdomTrade.Date = position.Date;
+                newWisdomTrade.Population = 1;
+                newWisdomTrade.Ticker = position.Ticker;
+                newWisdomTrade.FinalPricePrediction = position.PricePrediction;
+
+                await wtc.Create(newWisdomTrade);
+            }
         }
     }
 }

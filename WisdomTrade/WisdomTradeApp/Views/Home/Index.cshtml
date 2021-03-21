@@ -15,7 +15,16 @@
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.Ticker)
-            </th>            
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Date)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Population)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FinalPricePrediction)
+            </th>
             <th></th>
         </tr>
     </thead>
@@ -28,6 +37,9 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Population)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.FinalPricePrediction)

@@ -149,5 +149,15 @@ namespace WisdomTradeApp.Controllers
         {
             return _context.WisdomTrade.Any(e => e.Id == id);
         }
+
+        // helper method for other controllers
+        public WisdomTrade GetWisdomTrade(string ticker, DateTime date)
+        {
+            var item = _context.WisdomTrade
+                .Where(wt => wt.Ticker == ticker && wt.Date == date)
+                .FirstOrDefault();
+
+            return item;
+        }
     }
 }

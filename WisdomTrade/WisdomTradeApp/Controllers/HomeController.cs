@@ -21,10 +21,20 @@ namespace WisdomTradeApp.Controllers
             _logger = logger;
             _context = context;
         }
-
         public async Task<IActionResult> Index()
         {
+            var wisdomTrades = GetWisdomTrades();
+            return View(await wisdomTrades.ToListAsync());
+        }
 
+        // use if wisdom trade table is filled using method on position controller
+        //public IActionResult Index()
+        //{
+        //    return View();
+        //}
+
+        private IQueryable<WisdomTrade> GetWisdomTrades()
+        {
             var wisdomTrades =
                 from c in _context.Positions
                 group c by new
@@ -36,10 +46,10 @@ namespace WisdomTradeApp.Controllers
                 {
                     Ticker = gcs.Key.Ticker,
                     Date = gcs.Key.Date,
+                    Population = gcs.Count(),
                     FinalPricePrediction = gcs.Average(g => g.PricePrediction)
                 };
-
-            return View(await wisdomTrades.ToListAsync());
+            return wisdomTrades;
         }
 
         // price average of a ticker at a specific date

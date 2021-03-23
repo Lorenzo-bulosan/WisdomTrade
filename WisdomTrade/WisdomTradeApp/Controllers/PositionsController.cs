@@ -93,7 +93,7 @@ namespace WisdomTradeApp.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!PositionExists(position.Id)) return NotFound();
+                    if (!_positionService.PositionExists(position.Id)) return NotFound();
                     else throw;
                 }
                 return RedirectToAction(nameof(Index));
@@ -104,17 +104,11 @@ namespace WisdomTradeApp.Controllers
         // GET: Positions/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
+            if (id == null) return NotFound();
 
-            var position = await _context.Positions
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (position == null)
-            {
-                return NotFound();
-            }
+            var position = await _positionService.GetPositionAsync((int)id);
+
+            if (position == null) return NotFound();
 
             return View(position);
         }
@@ -124,22 +118,18 @@ namespace WisdomTradeApp.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var position = await _context.Positions.FindAsync(id);
-            _context.Positions.Remove(position);
-            await _context.SaveChangesAsync();
+            var position = await _positionService.GetPositionAsync(id);
+
+            await _positionService.DeleteAsync(position);
+
             return RedirectToAction(nameof(Index));
         }
-
-        private bool PositionExists(int id)
-        {
-            return _context.Positions.Any(e => e.Id == id);
-        }
-        private int CountPositions(string ticker, DateTime date)
+        public int CountPositions(string ticker, DateTime date)
         {
             return _context.Positions
                 .Where(p => p.Ticker == ticker && p.Date==date).Count();
         }
-        private IEnumerable<Position> GetAllPositions(string ticker, DateTime date)
+        public IEnumerable<Position> GetAllPositions(string ticker, DateTime date)
         {
             return _context.Positions
                 .Where(p => p.Ticker == ticker && p.Date == date);

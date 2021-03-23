@@ -37,5 +37,14 @@ namespace WisdomTradeApp.Data.Services
             _context.Update(position);
             await _context.SaveChangesAsync();
         }
+        public async Task DeleteAsync (Position position)
+        {
+            _context.Positions.Remove(position);
+            await _context.SaveChangesAsync();
+        }
+        public bool PositionExists(int id)
+        {
+            return _context.Positions.Any(e => e.Id == id);
+        }
     }
 }

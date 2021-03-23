@@ -163,38 +163,5 @@ namespace WisdomTradeApp.Controllers
             return _context.Positions
                 .Where(p => p.Ticker == ticker && p.Date == date);
         }
-
-        // currently not in use
-        // call controller of wisdom trade to find and update if exist and create if not exist
-        // creates an entry on db
-        private async Task UpdateWisdomTrade(Position position)
-        {
-            // update wisdom trade table
-            WisdomTradesController wtc = new WisdomTradesController(_context);
-            WisdomTrade wisdomTrade = wtc.GetWisdomTrade(position.Ticker, position.Date);
-
-            // update
-            if (wisdomTrade != null)
-            {
-                // find corresponding positions and update wisdomTrade item
-                var matchingPositions = GetAllPositions(position.Ticker, position.Date);
-                wisdomTrade.FinalPricePrediction = matchingPositions.Average(mp => mp.PricePrediction);
-                wisdomTrade.Population = matchingPositions.Count();
-
-                // apply changes
-                await wtc.Edit(wisdomTrade.Id, wisdomTrade);
-            }
-            //create
-            else
-            {
-                var newWisdomTrade = new WisdomTrade();
-                newWisdomTrade.Date = position.Date;
-                newWisdomTrade.Population = 1;
-                newWisdomTrade.Ticker = position.Ticker;
-                newWisdomTrade.FinalPricePrediction = position.PricePrediction;
-
-                await wtc.Create(newWisdomTrade);
-            }
-        }
     }
 }

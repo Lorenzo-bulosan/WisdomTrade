@@ -20,5 +20,11 @@ namespace WisdomTradeApp.Data.Services
         {
             return await _context.Positions.ToListAsync();
         }
+
+        public async Task<Position> GetPosition(int id)
+        {
+            return await _context.Positions
+               .FirstOrDefaultAsync(m => m.Id == id);
+        }
     }
 }

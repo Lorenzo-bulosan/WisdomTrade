@@ -28,24 +28,17 @@ namespace WisdomTradeApp.Controllers
         // GET: Positions
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Positions.ToListAsync());
-            //return View(await _positionService.GetAllPositionsAsync());
+            return View(await _positionService.GetAllPositionsAsync());
         }
 
         // GET: Positions/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
+            if (id == null) return NotFound();
 
-            var position = await _context.Positions
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (position == null)
-            {
-                return NotFound();
-            }
+            var position = await _positionService.GetPosition((int)id);
+
+            if (position == null) return NotFound();
 
             return View(position);
         }
@@ -57,8 +50,6 @@ namespace WisdomTradeApp.Controllers
         }
 
         // POST: Positions/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Ticker,Date,PricePrediction")] Position position)

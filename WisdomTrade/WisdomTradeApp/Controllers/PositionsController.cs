@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using WisdomTradeApp.Data;
+using WisdomTradeApp.Data.Services;
 using WisdomTradeApp.Models;
 
 namespace WisdomTradeApp.Controllers
@@ -15,17 +16,20 @@ namespace WisdomTradeApp.Controllers
     [Authorize]
     public class PositionsController : Controller
     {
+        private IPositionService _positionService;
         private readonly ApplicationDbContext _context;
 
-        public PositionsController(ApplicationDbContext context)
+        public PositionsController(ApplicationDbContext context, IPositionService positionService)
         {
             _context = context;
+            _positionService = positionService;
         }
 
         // GET: Positions
         public async Task<IActionResult> Index()
         {
             return View(await _context.Positions.ToListAsync());
+            //return View(await _positionService.GetAllPositionsAsync());
         }
 
         // GET: Positions/Details/5

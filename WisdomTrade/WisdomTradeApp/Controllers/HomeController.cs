@@ -27,12 +27,6 @@ namespace WisdomTradeApp.Controllers
             return View(await wisdomTrades.ToListAsync());
         }
 
-        // use if wisdom trade table is filled using method on position controller
-        //public IActionResult Index()
-        //{
-        //    return View();
-        //}
-
         private IQueryable<WisdomTrade> GetWisdomTrades()
         {
             var wisdomTrades =

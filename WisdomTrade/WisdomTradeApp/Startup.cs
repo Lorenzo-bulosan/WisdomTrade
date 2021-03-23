@@ -12,6 +12,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using WisdomTradeApp.Data;
+using WisdomTradeApp.Data.Services;
 
 namespace WisdomTradeApp
 {
@@ -34,7 +35,11 @@ namespace WisdomTradeApp
 
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
-            services.AddControllersWithViews();
+
+            // dependency injection container
+            services.AddScoped<IPositionService, PositionService>();
+
+            services.AddControllersWithViews();           
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

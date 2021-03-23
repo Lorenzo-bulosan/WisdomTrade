@@ -7,6 +7,8 @@ namespace WisdomTradeApp.Data.Services
     public interface IPositionService
     {
         public Task<List<Position>> GetAllPositionsAsync();
-        public Task<Position> GetPosition(int id);
+        public Task<Position> GetPositionAsync(int id);
+        public Task AddPositionAsync(Position position);
+        public Task UpdatePositionAsync(Position position);
     }
 }

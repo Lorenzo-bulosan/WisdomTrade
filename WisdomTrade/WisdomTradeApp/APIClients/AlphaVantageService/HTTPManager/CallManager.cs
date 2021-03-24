@@ -1,5 +1,6 @@
 ﻿using RestSharp;
 using System;
+using System.Configuration;
 using System.Threading.Tasks;
 
 namespace WisdomTradeApp.APIClients.AlphaVantageService
@@ -8,11 +9,13 @@ namespace WisdomTradeApp.APIClients.AlphaVantageService
     {
 
         readonly IRestClient _client;
-        private readonly Uri BaseUrl = new Uri(AppConfigReader.BaseUrl);
+        private string _baseUrl = AppConfigReader.BaseUrl;
+        private string _apikey = AppConfigReader.ApiKey;
 
         public CallManager()
         {
-            _client = new RestClient { BaseUrl = BaseUrl };
+            //_client = new RestClient { BaseUrl = _baseUrl };
+            _client = new RestClient { BaseUrl = new Uri(_baseUrl) };
         }
         private RestRequest InitialiseRequest()
         {
@@ -28,7 +31,7 @@ namespace WisdomTradeApp.APIClients.AlphaVantageService
         {
             var request = InitialiseRequest();
 
-            request.Resource = $"query?function=TIME_SERIES_DAILY&symbol={tickerSelected}&outputsize={outputsize}";
+            request.Resource = $"query?function=TIME_SERIES_DAILY&symbol={tickerSelected}&outputsize={outputsize}&apikey={_apikey}";
 
             IRestResponse response = await _client.ExecuteAsync(request);
 

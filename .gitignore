@@ -348,3 +348,8 @@ MigrationBackup/
 
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
+
+# Should actually just ignore web config, but configurationmanager is not working so ignore another file containing the sensitive information instead
+WisdomTradeApp/AppConfigReader.cs
+WisdomTradeApp/web.config
+

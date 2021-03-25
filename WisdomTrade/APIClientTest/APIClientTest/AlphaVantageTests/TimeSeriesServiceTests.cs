@@ -2,7 +2,7 @@ using NUnit.Framework;
 using System.Threading.Tasks;
 using WisdomTradeApp.APIClients.AlphaVantageService;
 
-namespace APIClientTest
+namespace APIClientTest.AlphaVantageTests
 {
     public class TimeSeriesServiceTests
     {

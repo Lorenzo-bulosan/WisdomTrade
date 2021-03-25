@@ -16,11 +16,9 @@ namespace WisdomTradeApp.Controllers
     public class PositionsController : Controller
     {
         private IPositionService _positionService;
-        private readonly ApplicationDbContext _context;
 
         public PositionsController(ApplicationDbContext context, IPositionService positionService)
         {
-            _context = context;
             _positionService = positionService;
         }
 
@@ -122,16 +120,6 @@ namespace WisdomTradeApp.Controllers
             await _positionService.DeleteAsync(position);
 
             return RedirectToAction(nameof(Index));
-        }
-        public int CountPositions(string ticker, DateTime date)
-        {
-            return _context.Positions
-                .Where(p => p.Ticker == ticker && p.Date==date).Count();
-        }
-        public IEnumerable<Position> GetAllPositions(string ticker, DateTime date)
-        {
-            return _context.Positions
-                .Where(p => p.Ticker == ticker && p.Date == date);
-        }
+        }        
     }
 }

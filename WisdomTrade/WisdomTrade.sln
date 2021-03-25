@@ -5,9 +5,7 @@ VisualStudioVersion = 16.0.31105.61
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WisdomTradeApp", "WisdomTradeApp\WisdomTradeApp.csproj", "{9F3B9D5A-3C67-4EF0-94F4-6AE95D36D47D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MLRegressionApp", "MLRegressionApp\MLRegressionApp.csproj", "{8440E6A1-2F08-4745-B207-D1E2DAB2BFDF}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "APIClientTest", "APIClientTest\APIClientTest.csproj", "{90FBF9FE-5E2F-4A08-98F9-61E2B44EBC28}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WisdomTradeTests", "APIClientTest\WisdomTradeTests.csproj", "{90FBF9FE-5E2F-4A08-98F9-61E2B44EBC28}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,10 +17,6 @@ Global
 		{9F3B9D5A-3C67-4EF0-94F4-6AE95D36D47D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9F3B9D5A-3C67-4EF0-94F4-6AE95D36D47D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9F3B9D5A-3C67-4EF0-94F4-6AE95D36D47D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{8440E6A1-2F08-4745-B207-D1E2DAB2BFDF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8440E6A1-2F08-4745-B207-D1E2DAB2BFDF}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8440E6A1-2F08-4745-B207-D1E2DAB2BFDF}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8440E6A1-2F08-4745-B207-D1E2DAB2BFDF}.Release|Any CPU.Build.0 = Release|Any CPU
 		{90FBF9FE-5E2F-4A08-98F9-61E2B44EBC28}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{90FBF9FE-5E2F-4A08-98F9-61E2B44EBC28}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{90FBF9FE-5E2F-4A08-98F9-61E2B44EBC28}.Release|Any CPU.ActiveCfg = Release|Any CPU

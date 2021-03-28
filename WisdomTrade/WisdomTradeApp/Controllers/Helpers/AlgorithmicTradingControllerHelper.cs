@@ -8,15 +8,15 @@ namespace WisdomTradeApp.Controllers.Helpers
 {
     public class AlgorithmicTradingControllerHelper
     {
-        public SMA SMA { get; set; }
-
         public AlgorithmicTradingControllerHelper()
         {
-            SMA = new SMA();
+            
         }
 
         public SMA GetSMA(decimal[] dailyPrices, string[] days,int windowSize)
         {
+            SMA sma = new SMA();
+
             dailyPrices.Reverse();
             int laggingPointer = 0;
             int leadingPointer = windowSize;
@@ -32,14 +32,18 @@ namespace WisdomTradeApp.Controllers.Helpers
                 {
                     smaPoint = currentSum / windowSize;
 
-                    SMA.ClosingPrice.Add(smaPoint);
-                    SMA.Dates.Add(days[i]);
+                    for (int x = 0; x < windowSize; x++)
+                    {
+                        sma.ClosingPrice.Add(smaPoint);
+                    }
+                    
+                    //sma.Dates.Add(days[i]);
 
                     laggingPointer = 0;
                     currentSum = 0;
                 }
             }
-            return SMA;
+            return sma;
         }
     }
 }

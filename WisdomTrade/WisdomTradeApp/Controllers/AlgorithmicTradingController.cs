@@ -40,6 +40,9 @@ namespace WisdomTradeApp.Controllers
             ViewBag.SMAClosingPrice = JsonConvert.SerializeObject(sma.ClosingPrice);
             ViewBag.SMADates = JsonConvert.SerializeObject(sma.Dates);
 
+            // new strategy
+            ViewBag.SMA = JsonConvert.SerializeObject(sma);
+
             return View();
         }
 

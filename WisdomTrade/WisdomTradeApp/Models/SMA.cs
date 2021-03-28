@@ -9,5 +9,11 @@ namespace WisdomTradeApp.Models
     {
         public List<decimal> ClosingPrice { get; set; }
         public List<string> Dates { get; set; }
+
+        public SMA()
+        {
+            ClosingPrice = new List<decimal>();
+            Dates = new List<string>();
+        }
     }
 }

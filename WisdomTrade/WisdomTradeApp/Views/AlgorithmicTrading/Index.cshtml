@@ -48,12 +48,20 @@
                         data: @Html.Raw(ViewBag.ClosingPrice),
                         fill: false,
                     },
-                    // SMA
+                    // SMA1
                     {
-                        label: 'SMA',
+                        label: 'SMA1',
                         backgroundColor: 'rgb(200, 150, 137)',
                         borderColor: 'rgb(200, 150, 137)',
-                        data: @Html.Raw(ViewBag.SMAClosingPrice),
+                        data: @Html.Raw(ViewBag.SMAClosingPrice1),
+                        fill: false,
+                    },
+                    // SMA2
+                    {
+                        label: 'SMA2',
+                        backgroundColor: 'rgb(250, 200, 100)',
+                        borderColor: 'rgb(250, 200, 100)',
+                        data: @Html.Raw(ViewBag.SMAClosingPrice2),
                         fill: false,
                     }
                 ]

@@ -32,16 +32,14 @@ namespace WisdomTradeApp.Controllers
             var dates = timeSeriesService.Responses.Select(r => r.Date);
 
             // calculate sma
-            var sma = atcHelper.GetSMA(closingPrice.ToArray(), dates.ToArray(), 5);
+            var sma1 = atcHelper.GetSMA(closingPrice.ToArray(), dates.ToArray(), 5);
+            var sma2 = atcHelper.GetSMA(closingPrice.ToArray(), dates.ToArray(), 10);
 
-            ViewBag.Symbol = $"IBM";
-            ViewBag.ClosingPrice = JsonConvert.SerializeObject(closingPrice);
             ViewBag.Dates = JsonConvert.SerializeObject(dates);
-            ViewBag.SMAClosingPrice = JsonConvert.SerializeObject(sma.ClosingPrice);
-            ViewBag.SMADates = JsonConvert.SerializeObject(sma.Dates);
+            ViewBag.ClosingPrice = JsonConvert.SerializeObject(closingPrice);
+            ViewBag.SMAClosingPrice1 = JsonConvert.SerializeObject(sma1.ClosingPrice);
+            ViewBag.SMAClosingPrice2 = JsonConvert.SerializeObject(sma2.ClosingPrice);
 
-            // new strategy
-            ViewBag.SMA = JsonConvert.SerializeObject(sma);
 
             return View();
         }

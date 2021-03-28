@@ -15,14 +15,12 @@ namespace WisdomTradeApp.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        private readonly ApplicationDbContext _context;
         private IPositionService _positionService;
 
         public HomeController(ILogger<HomeController> logger, ApplicationDbContext context,
                               IPositionService positionService)
         {
             _logger = logger;
-            _context = context;
             _positionService = positionService;
         }
         public async Task<IActionResult> Index()

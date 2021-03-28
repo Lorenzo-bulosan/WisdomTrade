@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json.Linq;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,11 +12,14 @@ namespace WisdomTradeApp.APIClients.AlphaVantageService
     {
         public CallManager CallManager { get; set; }
         public TimeSeriesDTO TimeSeriesDTO { get; set; }
-
         public String TickerSelected { get; set; }
-        public string Response { get; set; }
-        public JObject JsonResponse { get; set; }
 
+        // response from api in different formats
+        public string RawResponse { get; set; }
+        public JObject JsonResponse { get; set; }
+        public List<DailyPriceInformation> Responses { get; set; }
+
+        // constructor on call
         public TimeSeriesService()
         {
             CallManager = new CallManager();
@@ -25,10 +29,11 @@ namespace WisdomTradeApp.APIClients.AlphaVantageService
         public async Task MakeRequestAsync(string ticker)
         {
             TickerSelected = ticker;
-            
-            Response = await CallManager.RequestTimeSeriesAsync(TickerSelected);
-            JsonResponse = JObject.Parse(Response);
-            TimeSeriesDTO.DeserializeResponse(Response);
+
+            // returns csv string
+            RawResponse = await CallManager.RequestTimeSeriesAsync(TickerSelected);
+            JsonResponse = JObject.Parse(RawResponse);
+            Responses = TimeSeriesDTO.DeserializeResponse(JsonResponse);
         }
     }
 }

@@ -16,10 +16,16 @@ namespace APIClientTest.AlphaVantageTests
         }
 
         [Test]
-        public void WhenResquestingApple_ReturnsMetaDataWithCorrectSymbol()
+        public void WhenResquestingIBM_ReturnsMetaDataWithCorrectSymbol()
         {
-            var symbolOnResponse = _sut.JsonResponse["Meta Data"]["2. Symbol"].ToString();
-            Assert.That(symbolOnResponse, Is.EqualTo("IBM"));
+            var openPrice = _sut.JsonResponse["Meta Data"]["2. Symbol"].ToString();
+            Assert.That(openPrice, Is.EqualTo("IBM"));
+        }
+        [Test]
+        public void WhenResquestingIBMSpecificDate_ReturnCorrectString()
+        {
+            var openPrice = _sut.JsonResponse["Time Series (Daily)"]["2021-03-26"]["4. close"].ToString();
+            Assert.That(openPrice, Is.EqualTo("136.3800"));
         }
     }
 }

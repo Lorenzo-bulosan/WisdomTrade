@@ -27,11 +27,15 @@ namespace WisdomTradeApp.APIClients.AlphaVantageService
             return request;
         }
 
-        public async Task<string> RequestTimeSeriesAsync(string tickerSelected, string outputsize = "compact")
+        public async Task<string> RequestTimeSeriesAsync(string tickerSelected, string outputsize = "compact", string datatype = "json")
         {
             var request = InitialiseRequest();
 
-            request.Resource = $"query?function=TIME_SERIES_DAILY&symbol={tickerSelected}&outputsize={outputsize}&apikey={_apikey}";
+            request.Resource = $"query?function=TIME_SERIES_DAILY" +
+                $"&symbol={tickerSelected}" +
+                $"&outputsize={outputsize}" +
+                $"&apikey={_apikey}" +
+                $"&datatype={datatype}";
 
             IRestResponse response = await _client.ExecuteAsync(request);
 

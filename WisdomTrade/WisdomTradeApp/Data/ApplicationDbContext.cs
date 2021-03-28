@@ -14,6 +14,6 @@ namespace WisdomTradeApp.Data
         {
         }
         public DbSet<Position> Positions { get; set; }
-        public DbSet<WisdomTrade> WisdomTrade { get; set; }
+        public DbSet<WisdomTrade> WisdomTrade { get; set; }        
     }
 }

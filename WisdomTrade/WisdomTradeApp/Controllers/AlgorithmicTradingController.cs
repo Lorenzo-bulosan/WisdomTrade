@@ -1,30 +1,27 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using WisdomTradeApp.APIClients.AlphaVantageService;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
+using WisdomTradeApp.Data;
+using WisdomTradeApp.Models;
 
 namespace WisdomTradeApp.Controllers
 {
     public class AlgorithmicTradingController : Controller
     {
-        TimeSeriesService _timeSeriesService;
-
         public AlgorithmicTradingController()
         {
-            _timeSeriesService = new TimeSeriesService();
+
         }
-
-        // GET: AlgorithmicTrading
-        public async Task<ActionResult> Index()
+        // GET: AlgorithmicTradingViewModels
+        public IActionResult Index()
         {
-            // get data
-            await _timeSeriesService.MakeRequestAsync("IBM");
-            ViewBag.Ticker = _timeSeriesService.JsonResponse["Meta Data"]["2. Symbol"].ToString();
-
+            ViewBag.Test = "From controller";
             return View();
         }
+
     }
 }

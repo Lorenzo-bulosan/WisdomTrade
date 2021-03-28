@@ -1,4 +1,5 @@
 using NUnit.Framework;
+using System.Linq;
 using System.Threading.Tasks;
 using WisdomTradeApp.APIClients.AlphaVantageService;
 
@@ -16,16 +17,22 @@ namespace APIClientTest.AlphaVantageTests
         }
 
         [Test]
-        public void WhenResquestingIBM_ReturnsMetaDataWithCorrectSymbol()
+        public void WhenResquestingIBM__AndUsingJsonResponse__ReturnsMetaDataWithCorrectSymbol()
         {
             var openPrice = _sut.JsonResponse["Meta Data"]["2. Symbol"].ToString();
             Assert.That(openPrice, Is.EqualTo("IBM"));
         }
         [Test]
-        public void WhenResquestingIBMSpecificDate_ReturnCorrectString()
+        public void WhenResquestingIBMSpecificDate_AndUsingJsonResponse_ReturnCorrectString()
         {
-            var openPrice = _sut.JsonResponse["Time Series (Daily)"]["2021-03-26"]["4. close"].ToString();
-            Assert.That(openPrice, Is.EqualTo("136.3800"));
+            var closePrice = _sut.JsonResponse["Time Series (Daily)"]["2021-03-26"]["4. close"].ToString();
+            Assert.That(closePrice, Is.EqualTo("136.3800"));
+        }
+        [Test]
+        public void WhenResquestingIBMSpecificDate_UsingObjectResponse_ReturnCorrectString()
+        {
+            var dayPriceQuery = _sut.Responses.Where(r => r.Date == "2021-03-26").FirstOrDefault();
+            Assert.That(dayPriceQuery.Close, Is.EqualTo(136.3800));
         }
     }
 }

@@ -9,7 +9,7 @@ namespace WisdomTradeApp.APIClients.AlphaVantageService
     }
     public class DailyPriceInformation
     {
-        public DateTime Timestamp { get; set; }
+        public string Date { get; set; }
         public decimal Close { get; set; }
         public decimal Open { get; set; }
         public decimal Low { get; set; }

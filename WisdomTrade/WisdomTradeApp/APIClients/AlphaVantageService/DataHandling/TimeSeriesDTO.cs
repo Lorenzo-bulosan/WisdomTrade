@@ -25,10 +25,8 @@ namespace WisdomTradeApp.APIClients.AlphaVantageService
             // loop through all days
             foreach (var day in jsonObj["Time Series (Daily)"])
             {
-                // get day as string
                 currentDate = day.ToObject<JProperty>().Name;
 
-                // get information on each day and add to list
                 foreach (var dayPrices in day)
                 {
                     DailyPriceInformation = GetDailyPriceInformation(currentDate, dayPrices);
@@ -56,15 +54,9 @@ namespace WisdomTradeApp.APIClients.AlphaVantageService
             dailyPriceInformation.High = decimal.Parse(high);
             dailyPriceInformation.Low = decimal.Parse(low);
             dailyPriceInformation.Volume = decimal.Parse(volume);
-            dailyPriceInformation.Timestamp = DateTime.Parse(currentDay);
+            dailyPriceInformation.Date = currentDay;
 
             return dailyPriceInformation;
         }
     }
 }
-
-//"1. open": "133.2900",
-//            "2. high": "136.4800",
-//            "3. low": "133.1200",
-//            "4. close": "136.3800",
-//            "5. volume": "5567592"

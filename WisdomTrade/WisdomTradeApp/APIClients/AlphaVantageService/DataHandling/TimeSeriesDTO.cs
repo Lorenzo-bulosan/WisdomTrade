@@ -32,7 +32,7 @@ namespace WisdomTradeApp.APIClients.AlphaVantageService
                     DailyPriceInformation = GetDailyPriceInformation(currentDate, dayPrices);
                     ListOfDailyPrices.Add(DailyPriceInformation);
                 }
-            }
+            }            
             return ListOfDailyPrices;
         }
 

@@ -5,3 +5,73 @@
 <h1>Algorithmic trading</h1>
 
 <p>@ViewBag.Test</p>
+
+<div>
+    <canvas id="Chart"></canvas>
+</div>
+
+<div>
+    <p>Simple strategy: Taking SMA (simple moving average) line of 200 days and 50days and but when they cross </p>
+</div>
+
+
+
+
+
+
+
+
+
+@*js library for graph*@
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+
+<script>
+    window.onload = function () {
+        DrawGraph();
+    }
+
+    function DrawGraph() {
+        var ctx = document.getElementById('Chart').getContext('2d');
+        var chart = new Chart(ctx, {
+            // The type of chart we want to create
+            type: 'line',
+
+            // The data for our dataset
+            data: {
+                // x-data
+                labels: @Html.Raw(ViewBag.Dates),
+                datasets: [{
+                    label: 'Closing price',
+                    backgroundColor: 'rgb(168, 50, 137)',
+                    borderColor: 'rgb(168, 50, 137)',
+                    // y-data
+                    data: @Html.Raw(ViewBag.ClosingPrice),
+                    fill: false,
+                }, {
+                    label: 'SMA',
+                    backgroundColor: 'rgb(200, 150, 137)',
+                    borderColor: 'rgb(200, 150, 137)',
+                    // y-data
+                    data: @Html.Raw(ViewBag.SMA),
+                    fill: false,
+                }]
+            },
+
+            // Configuration options go here
+            options: {
+                title: {
+                    display: true,
+                    text: 'Closing price IBM'
+                },
+                scales: {
+                    yAxes: [{
+                        scaleLabel: {
+                            display: true,
+                            labelString: 'Closing price'
+                        }
+                    }]
+                }
+            }
+        });
+    }
+</script>

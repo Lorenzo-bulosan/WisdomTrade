@@ -2,6 +2,7 @@
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -30,10 +31,15 @@ namespace WisdomTradeApp.APIClients.AlphaVantageService
         {
             TickerSelected = ticker;
 
-            // returns csv string
-            RawResponse = await CallManager.RequestTimeSeriesAsync(TickerSelected);
+            // uncomment for real data
+            //RawResponse = await CallManager.RequestTimeSeriesAsync(TickerSelected);
+
+            // test data
+            RawResponse = new StreamReader("C:/Users/loren/Desktop/Side Projects/WisdomTrade/WisdomTrade/WisdomTradeApp/APIClients/TestData.json").ReadToEnd();
+            
             JsonResponse = JObject.Parse(RawResponse);
             Responses = TimeSeriesDTO.DeserializeResponse(JsonResponse);
+            Responses.Reverse();
         }
     }
 }

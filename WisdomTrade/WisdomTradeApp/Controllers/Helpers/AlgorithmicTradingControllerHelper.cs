@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using WisdomTradeApp.Models;
 
 namespace WisdomTradeApp.Controllers.Helpers
@@ -10,10 +9,9 @@ namespace WisdomTradeApp.Controllers.Helpers
     {
         public AlgorithmicTradingControllerHelper()
         {
-            
         }
 
-        public SMA GetSMA(decimal[] dailyPrices, string[] days,int windowSize)
+        public SMA GetSMA(decimal[] dailyPrices, string[] days, int windowSize)
         {
             SMA sma = new SMA();
 
@@ -28,7 +26,7 @@ namespace WisdomTradeApp.Controllers.Helpers
                 currentSum += dailyPrices[i];
                 laggingPointer++;
 
-                if(laggingPointer == leadingPointer)
+                if (laggingPointer == leadingPointer)
                 {
                     smaPoint = currentSum / windowSize;
 
@@ -36,14 +34,31 @@ namespace WisdomTradeApp.Controllers.Helpers
                     {
                         sma.ClosingPrice.Add(smaPoint);
                     }
-                    
-                    //sma.Dates.Add(days[i]);
+
+                    sma.Dates.Add(days[i]);
 
                     laggingPointer = 0;
                     currentSum = 0;
                 }
             }
             return sma;
+        }
+
+        public (decimal EntryPoint, string Date) GetEntryPoint(List<decimal> data1, List<decimal> data2, List<string> dates)
+        {
+            decimal entryPoint = 0;
+            string date = "";
+
+            for (int i = 0; i < data1.Count(); i++)
+            {
+                if (data1[i] >= data2[i])
+                {
+                    entryPoint = data1[i];
+                    date = dates[i];
+                }
+            }
+
+            return (entryPoint, date);
         }
     }
 }

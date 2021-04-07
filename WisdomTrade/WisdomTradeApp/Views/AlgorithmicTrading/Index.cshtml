@@ -14,12 +14,12 @@
     <p>Simple strategy: Taking SMA (simple moving average) line of 200 days and 50days and but when they cross </p>
 </div>
 
+<h3>Entry point at @ViewBag.EntryPointDate, current price: @ViewBag.EntryPoint</h3>
 
-
-
-
-
-
+@*@foreach (var item in @ViewBag.EntryPointDate)
+{
+    <p>@Html.</p>
+}*@
 
 
 @*js library for graph*@
@@ -43,24 +43,24 @@
                     // Closing price
                     {
                         label: 'Closing price',
-                        backgroundColor: 'rgb(168, 50, 137)',
-                        borderColor: 'rgb(168, 50, 137)',
+                        backgroundColor: 'rgb(0, 0, 0)',
+                        borderColor: 'rgb(0, 0, 0)',
                         data: @Html.Raw(ViewBag.ClosingPrice),
                         fill: false,
                     },
                     // SMA1
                     {
                         label: 'SMA1',
-                        backgroundColor: 'rgb(200, 150, 137)',
-                        borderColor: 'rgb(200, 150, 137)',
+                        backgroundColor: 'rgb(200, 50, 37)',
+                        borderColor: 'rgb(200, 50, 37)',
                         data: @Html.Raw(ViewBag.SMAClosingPrice1),
                         fill: false,
                     },
                     // SMA2
                     {
                         label: 'SMA2',
-                        backgroundColor: 'rgb(250, 200, 100)',
-                        borderColor: 'rgb(250, 200, 100)',
+                        backgroundColor: 'rgb(25, 20, 200)',
+                        borderColor: 'rgb(25, 20, 200)',
                         data: @Html.Raw(ViewBag.SMAClosingPrice2),
                         fill: false,
                     }

@@ -7,8 +7,7 @@ namespace APIClientTest.AlphaVantageTests
 {
     public class TimeSeriesServiceTests
     {
-
-        TimeSeriesService _sut = new TimeSeriesService();
+        private TimeSeriesService _sut = new TimeSeriesService();
 
         [OneTimeSetUp]
         public async Task OneTimeSetUpAsync()
@@ -22,12 +21,14 @@ namespace APIClientTest.AlphaVantageTests
             var openPrice = _sut.JsonResponse["Meta Data"]["2. Symbol"].ToString();
             Assert.That(openPrice, Is.EqualTo("IBM"));
         }
+
         [Test]
         public void WhenResquestingIBMSpecificDate_AndUsingJsonResponse_ReturnCorrectString()
         {
             var closePrice = _sut.JsonResponse["Time Series (Daily)"]["2021-03-26"]["4. close"].ToString();
             Assert.That(closePrice, Is.EqualTo("136.3800"));
         }
+
         [Test]
         public void WhenResquestingIBMSpecificDate_UsingObjectResponse_ReturnCorrectString()
         {
